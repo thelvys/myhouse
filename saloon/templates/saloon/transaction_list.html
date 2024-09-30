@@ -1,0 +1,52 @@
+<!-- 18. transaction_list.html -->
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">{% trans "Transactions" %}</h2>
+        <a href="{% url 'saloon:transaction_create' salon_id=view.kwargs.salon_id %}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+            {% trans "Add New Transaction" %}
+        </a>
+    </div>
+    
+    <div class="overflow-x-auto responsive-table">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th class="px-5 py-3">{% trans "Description" %}</th>
+                    <th class="px-5 py-3">{% trans "Amount" %}</th>
+                    <th class="px-5 py-3">{% trans "Currency" %}</th>
+                    <th class="px-5 py-3">{% trans "Exchange Rate" %}</th>
+                    <th class="px-5 py-3">{% trans "Date Transaction" %}</th>
+                    <th class="px-5 py-3">{% trans "Transaction Type" %}</th>
+                    <th class="px-5 py-3">{% trans "Cash Register" %}</th>
+                    <th class="px-5 py-3">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                {% for transaction in transactions %}
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="px-5 py-5">{{ transaction.trans_name }}</td>
+                    <td class="px-5 py-5">{{ transaction.amount|floatformat:2 }} {{ transaction.currency.code }}</td>
+                    <td class="px-5 py-5">{{ transaction.currency.code }}</td>
+                    <td class="px-5 py-5">{{ transaction.exchange_rate|floatformat:2 }}</td>
+                    <td class="px-5 py-5">{{ transaction.date_trans }}</td>
+                    <td class="px-5 py-5">{{ transaction.trans_type }}</td>
+                    <td class="px-5 py-5">{{ transaction.cashregister.name }}</td>
+                    <td class="px-5 py-5">
+                        <a href="{% url 'saloon:transaction_update' salon_id=view.kwargs.salon_id pk=transaction.pk %}" class="text-green-600 hover:text-green-900 mr-2">{% trans "Edit" %}</a>
+                        <a href="{% url 'saloon:transaction_delete' salon_id=view.kwargs.salon_id pk=transaction.pk %}" class="text-red-600 hover:text-red-900">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="6" class="px-5 py-5 text-center">{% trans "No transactions yet." %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

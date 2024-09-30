@@ -65,5 +65,35 @@ urlpatterns = [
     path('<int:salon_id>/currencies/<int:pk>/update/', views.CurrencyUpdateView.as_view(), name='currency_update'),
     path('<int:salon_id>/currencies/<int:pk>/delete/', views.CurrencyDeleteView.as_view(), name='currency_delete'),
 
+    # CashRegister URLs
+    path('<int:salon_id>/cash_registers/', views.CashRegisterListView.as_view(), name='cash_register_list'),
+    path('<int:salon_id>/cash_registers/create/', views.CashRegisterCreateView.as_view(), name='cash_register_create'),
+    path('<int:salon_id>/cash_registers/<int:pk>/update/', views.CashRegisterUpdateView.as_view(), name='cash_register_update'),
+    path('<int:salon_id>/cash_registers/<int:pk>/delete/', views.CashRegisterDeleteView.as_view(), name='cash_register_delete'),
+
+    # PaymentType URLs
+    path('<int:salon_id>/payment_types/', views.PaymentTypeListView.as_view(), name='payment_type_list'),
+    path('<int:salon_id>/payment_types/create/', views.PaymentTypeCreateView.as_view(), name='payment_type_create'),
+    path('<int:salon_id>/payment_types/<int:pk>/update/', views.PaymentTypeUpdateView.as_view(), name='payment_type_update'),
+    path('<int:salon_id>/payment_types/<int:pk>/delete/', views.PaymentTypeDeleteView.as_view(), name='payment_type_delete'),
+
+    # Payment URLs
+    path('<int:salon_id>/payments/', views.PaymentListView.as_view(), name='payment_list'),
+    path('<int:salon_id>/payments/create/', views.PaymentCreateView.as_view(), name='payment_create'),
+    path('<int:salon_id>/payments/<int:pk>/update/', views.PaymentUpdateView.as_view(), name='payment_update'),
+    path('<int:salon_id>/payments/<int:pk>/delete/', views.PaymentDeleteView.as_view(), name='payment_delete'),
+
+    # Transaction URLs
+    path('<int:salon_id>/transactions/', views.TransactionListView.as_view(), name='transaction_list'),
+    path('<int:salon_id>/transactions/create/', views.TransactionCreateView.as_view(), name='transaction_create'),
+    path('<int:salon_id>/transactions/<int:pk>/update/', views.TransactionUpdateView.as_view(), name='transaction_update'),
+    path('<int:salon_id>/transactions/<int:pk>/delete/', views.TransactionDeleteView.as_view(), name='transaction_delete'),
+
+    # HairstyleTariffHistory URLs
+    path('<int:salon_id>/hairstyle_tariff_histories/', views.HairstyleTariffHistoryListView.as_view(), name='hairstyle_tariff_history_list'),
+    path('<int:salon_id>/hairstyle_tariff_histories/create/', views.HairstyleTariffHistoryCreateView.as_view(), name='hairstyle_tariff_history_create'),
+    path('<int:salon_id>/hairstyle_tariff_histories/<int:pk>/update/', views.HairstyleTariffHistoryUpdateView.as_view(), name='hairstyle_tariff_history_update'),
+    path('<int:salon_id>/hairstyle_tariff_histories/<int:pk>/delete/', views.HairstyleTariffHistoryDeleteView.as_view(), name='hairstyle_tariff_history_delete'),
+
 # Ajoutez des URLs similaires pour CashRegister, PaymentType, Payment, Transaction, HairstyleTariffHistory, et ItemUsed
 ]

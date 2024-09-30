@@ -161,17 +161,38 @@ data-twe-navbar-ref>
                                     <a href="{% url 'saloon:client_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                         {% trans "Clients" %}
                                     </a>
-                                    <a href="{% url 'saloon:hairstyle_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                                        {% trans "Hairstyles" %}
+                                    <a href="{% url 'saloon:currency_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Currencies" %}
                                     </a>
-                                    <a href="{% url 'saloon:shave_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
-                                        {% trans "Shaves" %}
+                                    <a href="{% url 'saloon:cash_register_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Cash Registers" %}
+                                    </a>
+                                    <a href="{% url 'saloon:commission_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Commissions" %}
                                     </a>
                                     <a href="{% url 'saloon:item_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                         {% trans "Items" %}
                                     </a>
                                     <a href="{% url 'saloon:item_purchase_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
                                         {% trans "Purchases" %}
+                                    </a>
+                                    <a href="{% url 'saloon:hairstyle_tariff_history_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Hairstyle Tariff History" %}
+                                    </a>
+                                    <a href="{% url 'saloon:hairstyle_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Hairstyles" %}
+                                    </a>
+                                    <a href="{% url 'saloon:shave_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Shaves" %}
+                                    </a>
+                                    <a href="{% url 'saloon:payment_type_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Payment Types" %}
+                                    </a>
+                                    <a href="{% url 'saloon:payment_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Payments" %}
+                                    </a>
+                                    <a href="{% url 'saloon:transaction_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Transactions" %}
                                     </a>
                                 </div>
                             {% endwith %}

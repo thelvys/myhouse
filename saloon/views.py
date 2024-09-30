@@ -527,3 +527,244 @@ class CurrencyDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequi
         return reverse_lazy('saloon:currency_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
 
 # Ajoutez des vues similaires pour CashRegister, PaymentType, Payment, Transaction, HairstyleTariffHistory, et ItemUsed
+
+# ChashRegister views
+class CashRegisterListView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, ListView):
+    model = CashRegister
+    template_name = 'saloon/cash_register_list.html'
+    context_object_name = 'cash_registers'
+
+    def get_queryset(self):
+        salon_id = self.kwargs.get('salon_id')
+        return CashRegister.objects.filter(salon__id=salon_id, salon__owner=self.request.user)
+
+class CashRegisterCreateView(LoginRequiredMixin, SalonOwnerRequiredMixin, CreateView):
+    model = CashRegister
+    form_class = CashRegisterForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Cash Register'
+        return context
+
+    def form_valid(self, form):
+        salon = get_object_or_404(Salon, id=self.kwargs.get('salon_id'), owner=self.request.user)
+        form.instance.salon = salon
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:cash_register_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class CashRegisterUpdateView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = CashRegister
+    form_class = CashRegisterForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Cash Register'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:cash_register_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class CashRegisterDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = CashRegister
+    template_name = 'saloon/generic_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:cash_register_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+# PaymentType views
+class PaymentTypeListView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, ListView):
+    model = PaymentType
+    template_name = 'saloon/payment_type_list.html'
+    context_object_name = 'payment_types'
+
+    def get_queryset(self):
+        salon_id = self.kwargs.get('salon_id')
+        return PaymentType.objects.filter(salon__id=salon_id, salon__owner=self.request.user)
+
+class PaymentTypeCreateView(LoginRequiredMixin, SalonOwnerRequiredMixin, CreateView):
+    model = PaymentType
+    form_class = PaymentTypeForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Payment Type'
+        return context
+
+    def form_valid(self, form):
+        salon = get_object_or_404(Salon, id=self.kwargs.get('salon_id'), owner=self.request.user)
+        form.instance.salon = salon
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_type_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class PaymentTypeUpdateView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = PaymentType
+    form_class = PaymentTypeForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Payment Type'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_type_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class PaymentTypeDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = PaymentType
+    template_name = 'saloon/generic_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_type_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+# Payment views
+class PaymentListView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, ListView):
+    model = Payment
+    template_name = 'saloon/payment_list.html'
+    context_object_name = 'payments'
+
+    def get_queryset(self):
+        salon_id = self.kwargs.get('salon_id')
+        return Payment.objects.filter(salon__id=salon_id, salon__owner=self.request.user)
+
+class PaymentCreateView(LoginRequiredMixin, SalonOwnerRequiredMixin, CreateView):
+    model = Payment
+    form_class = PaymentForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Payment'
+        return context
+
+    def form_valid(self, form):
+        salon = get_object_or_404(Salon, id=self.kwargs.get('salon_id'), owner=self.request.user)
+        form.instance.salon = salon
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class PaymentUpdateView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = Payment
+    form_class = PaymentForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Payment'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class PaymentDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = Payment
+    template_name = 'saloon/generic_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:payment_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+# Transaction views
+class TransactionListView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, ListView):
+    model = Transaction 
+    template_name = 'saloon/transaction_list.html'
+    context_object_name = 'transactions'
+
+    def get_queryset(self):
+        salon_id = self.kwargs.get('salon_id')
+        return Transaction.objects.filter(salon__id=salon_id, salon__owner=self.request.user)
+
+class TransactionCreateView(LoginRequiredMixin, SalonOwnerRequiredMixin, CreateView):
+    model = Transaction
+    form_class = TransactionForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Transaction'
+        return context
+
+    def form_valid(self, form):
+        salon = get_object_or_404(Salon, id=self.kwargs.get('salon_id'), owner=self.request.user)
+        form.instance.salon = salon
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:transaction_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class TransactionUpdateView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = Transaction
+    form_class = TransactionForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Transaction'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:transaction_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class TransactionDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = Transaction
+    template_name = 'saloon/generic_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:transaction_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+# HairstyleTariffHistory views
+class HairstyleTariffHistoryListView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, ListView):
+    model = HairstyleTariffHistory
+    template_name = 'saloon/hairstyle_tariff_history_list.html'
+    context_object_name = 'tariff_history'
+
+    def get_queryset(self):
+        salon_id = self.kwargs.get('salon_id')
+        return HairstyleTariffHistory.objects.filter(hairstyle__salon__id=salon_id, hairstyle__salon__owner=self.request.user)
+
+class HairstyleTariffHistoryCreateView(LoginRequiredMixin, SalonOwnerRequiredMixin, CreateView):
+    model = HairstyleTariffHistory
+    form_class = HairstyleTariffHistoryForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Hairstyle Tariff History'
+        return context
+
+    def form_valid(self, form):
+        salon = get_object_or_404(Salon, id=self.kwargs.get('salon_id'), owner=self.request.user)
+        form.instance.hairstyle.salon = salon
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:hairstyle_tariff_history_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class HairstyleTariffHistoryUpdateView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = HairstyleTariffHistory
+    form_class = HairstyleTariffHistoryForm
+    template_name = 'saloon/generic_form.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['model_name'] = 'Hairstyle Tariff History'
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:hairstyle_tariff_history_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
+class HairstyleTariffHistoryDeleteView(LoginRequiredMixin, SalonOwnerRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = HairstyleTariffHistory
+    template_name = 'saloon/generic_confirm_delete.html'
+
+    def get_success_url(self):
+        return reverse_lazy('saloon:hairstyle_tariff_history_list', kwargs={'salon_id': self.kwargs.get('salon_id')})
+
