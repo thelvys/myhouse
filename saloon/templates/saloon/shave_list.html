@@ -1,0 +1,46 @@
+<!-- 7. shave_list.html -->
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">{% trans "Shaves" %}</h2>
+        <a href="{% url 'saloon:shave_create' salon_id=view.kwargs.salon_id %}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+            {% trans "Add New Shave" %}
+        </a>
+    </div>
+    
+    <div class="overflow-x-auto responsive-table">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th class="px-5 py-3">{% trans "Hairstyle" %}</th>
+                    <th class="px-5 py-3">{% trans "Amount" %}</th>
+                    <th class="px-5 py-3">{% trans "Barber" %}</th>
+                    <th class="px-5 py-3">{% trans "Date" %}</th>
+                    <th class="px-5 py-3">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                {% for shave in shaves %}
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="px-5 py-5">{{ shave.hairstyle.name }}</td>
+                    <td class="px-5 py-5">{{ shave.amount }} {{ shave.currency.code }}</td>
+                    <td class="px-5 py-5">{{ shave.barber.user.get_full_name }}</td>
+                    <td class="px-5 py-5">{{ shave.date_shave }}</td>
+                    <td class="px-5 py-5">
+                        <a href="{% url 'saloon:shave_update' salon_id=view.kwargs.salon_id pk=shave.pk %}" class="text-green-600 hover:text-green-900 mr-2">{% trans "Edit" %}</a>
+                        <a href="{% url 'saloon:shave_delete' salon_id=view.kwargs.salon_id pk=shave.pk %}" class="text-red-600 hover:text-red-900">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="px-5 py-5 text-center">{% trans "No shaves yet." %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

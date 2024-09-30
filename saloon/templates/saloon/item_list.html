@@ -1,0 +1,58 @@
+<!-- 8. item_list.html -->
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="bg-white shadow-md rounded-lg overflow-hidden">
+    <div class="p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">{% trans "Items" %}</h2>
+        <a href="{% url 'saloon:item_create' salon_id=view.kwargs.salon_id %}" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+            {% trans "Add New Item" %}
+        </a>
+        {% if user.owned_salons.exists %}
+            {% with salon=user.owned_salons.first %}
+                <a href="{% url 'saloon:item_purchase_list' salon.id %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+                    {% trans "Item Purchased" %}
+                </a>                                               
+                <a href="{% url 'saloon:item_used_list' salon.id %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded mb-4 inline-block">
+                    {% trans "Item Used" %}
+                </a>
+            {% endwith %}
+        {% endif %}
+    </div>
+    
+    <div class="overflow-x-auto responsive-table">
+        <table class="w-full">
+            <thead>
+                <tr class="bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
+                    <th class="px-5 py-3">{% trans "Name" %}</th>
+                    <th class="px-5 py-3">{% trans "Description" %}</th>
+                    <th class="px-5 py-3">{% trans "Stock" %}</th>
+                    <th class="px-5 py-3">{% trans "Purchased" %}</th>
+                    <th class="px-5 py-3">{% trans "Used" %}</th>
+                    <th class="px-5 py-3">{% trans "Actions" %}</th>
+                </tr>
+            </thead>
+            <tbody class="text-gray-600 text-sm font-light">
+                {% for item in items %}
+                <tr class="border-b border-gray-200 hover:bg-gray-100">
+                    <td class="px-5 py-5">{{ item.name }}</td>
+                    <td class="px-5 py-5">{{ item.item_purpose.all|join:", " }}</td>
+                    <td class="px-5 py-5">{{ item.current_stock|default_if_none:"" }}</td>
+                    <td class="px-5 py-5">{{ item.total_purchased|default_if_none:""|floatformat:2 }}</td>
+                    <td class="px-5 py-5">{{ item.total_used|default_if_none:""|floatformat:2 }}</td>
+                    <td class="px-5 py-5">
+                        <a href="{% url 'saloon:item_update' salon_id=view.kwargs.salon_id pk=item.pk %}" class="text-green-600 hover:text-green-900 mr-2">{% trans "Edit" %}</a>
+                        <a href="{% url 'saloon:item_delete' salon_id=view.kwargs.salon_id pk=item.pk %}" class="text-red-600 hover:text-red-900">{% trans "Delete" %}</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-5 py-5 text-center">{% trans "No items yet." %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

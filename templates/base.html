@@ -1,0 +1,219 @@
+<!-- 1. base.html -->
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100 dark:bg-gray-900">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SUIDO{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @media (max-width: 640px) {
+            .responsive-table {
+                display: block;
+                width: 100%;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        
+        // Initialization for ES Users
+        import {
+            Collapse,
+            initTWE,
+        } from "tw-elements";
+
+        initTWE({ Collapse });
+    </style>
+</head>
+<body class="h-full">
+
+    <!-- Main navigation container -->
+<nav
+class="relative flex w-full flex-wrap items-center justify-between bg-zinc-50 py-2 shadow-dark-mild dark:bg-neutral-700 lg:py-4"
+data-twe-navbar-ref>
+<div class="flex w-full flex-wrap items-center justify-between px-3">
+  <div>
+    <a class="mx-2 my-1 flex items-center lg:mb-0 lg:mt-0" href="#">
+      <img
+        class="me-2"
+        src="https://tecdn.b-cdn.net/img/logo/te-transparent-noshadows.webp"
+        style="height: 20px"
+        alt="TE Logo"
+        loading="lazy" />
+    </a>
+  </div>
+
+  <!-- Hamburger button for mobile view -->
+  <button
+    class="block border-0 bg-transparent px-2 text-black/50 hover:no-underline hover:shadow-none focus:no-underline focus:shadow-none focus:outline-none focus:ring-0 dark:text-neutral-200 lg:hidden"
+    type="button"
+    data-twe-collapse-init
+    data-twe-target="#navbarSupportedContent4"
+    aria-controls="navbarSupportedContent4"
+    aria-expanded="false"
+    aria-label="Toggle navigation">
+    <!-- Hamburger icon -->
+    <span
+      class="[&>svg]:w-7 [&>svg]:stroke-black/50 dark:[&>svg]:stroke-neutral-200">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="currentColor">
+        <path
+          fill-rule="evenodd"
+          d="M3 6.75A.75.75 0 013.75 6h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 6.75zM3 12a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75A.75.75 0 013 12zm0 5.25a.75.75 0 01.75-.75h16.5a.75.75 0 010 1.5H3.75a.75.75 0 01-.75-.75z"
+          clip-rule="evenodd" />
+      </svg>
+    </span>
+  </button>
+
+  <!-- Collapsible navbar container -->
+  <div
+    class="!visible mt-2 hidden flex-grow basis-[100%] items-center lg:mt-0 lg:!flex lg:basis-auto"
+    id="navbarSupportedContent4"
+    data-twe-collapse-item>
+    <!-- Left links -->
+    <ul
+      class="list-style-none me-auto flex flex-col ps-0 lg:mt-1 lg:flex-row"
+      data-twe-navbar-nav-ref>
+      <!-- Home link -->
+      <li
+        class="my-4 ps-2 lg:my-0 lg:pe-1 lg:ps-2"
+        data-twe-nav-item-ref>
+        <a
+          class="text-black/60 transition duration-200 hover:text-black/80 hover:ease-in-out focus:text-black/80 active:text-black/80 motion-reduce:transition-none dark:text-white/60 dark:hover:text-white/80 dark:focus:text-white/80 dark:active:text-white/80 lg:px-2"
+          aria-current="page"
+          href="{% url 'accounts:landing' %}"
+          data-twe-nav-link-ref
+          >Suido - Dashboard</a
+        >
+      </li>
+    </ul>
+
+    <div class="flex items-center">
+    {% if user.is_authenticated %}
+    <span class="text-gray-700 dark:text-gray-300 mr-4">{% trans "Welcome" %}, {{ user.get_short_name }}</span>
+    <a href="{% url 'accounts:logout' %}"
+      type="button"
+      data-twe-ripple-init
+      data-twe-ripple-color="light"
+      class="me-3 inline-block bg-indigo-600 hover:bg-indigo-700 rounded px-2 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-white hover:text-white-600 focus:text-white-600 focus:outline-none focus:ring-0 active:text-white-700 dark:text-white-600 dark:hover:text-white-500 dark:focus:text-white-500 dark:active:text-white-500">
+      Logout
+    </a>
+    {% else %}
+    <a href="{% url 'accounts:login' %}"
+      type="button"
+      data-twe-ripple-init
+      data-twe-ripple-color="light"
+      class="me-3 inline-block bg-indigo-600 hover:bg-indigo-700 rounded px-2 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-white hover:text-white-600 focus:text-white-600 focus:outline-none focus:ring-0 active:text-white-700 dark:text-white-600 dark:hover:text-white-500 dark:focus:text-white-500 dark:active:text-white-500">
+      Login
+</a>
+    <a href="{% url 'accounts:signup' %}"
+      type="button"
+      data-twe-ripple-init
+      data-twe-ripple-color="light"
+      class="me-3 inline-block rounded border border-indigo-600 px-2 pb-2 pt-2.5 text-xs font-bold uppercase leading-normal text-primary hover:text-primary-600 focus:text-primary-600 focus:outline-none focus:ring-0 active:text-primary-700 dark:text-secondary-600 dark:hover:text-secondary-500 dark:focus:text-secondary-500 dark:active:text-secondary-500">
+      Sign up
+</a>
+    {% endif %}
+    </div>
+  </div>
+</div>
+</nav>
+
+<!-- End Test -->
+   
+            <div class="md:hidden" id="mobile-menu">
+                <div class="space-y-1 px-2 pt-2 pb-3 sm:px-3">
+                    {% if user.is_authenticated %}
+                        <span class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300">{% trans "Welcome" %}, {{ user.get_short_name }}</span>
+                        <a href="{% url 'accounts:logout' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">{% trans "Logout" %}</a>
+                        <a href="{% url 'saloon:salon_list' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">{% trans "Salons" %}</a>
+                    {% else %}
+                        <a href="{% url 'accounts:login' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">{% trans "Login" %}</a>
+                        <a href="{% url 'accounts:signup' %}" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700">{% trans "Sign Up" %}</a>
+                    {% endif %}
+                </div>
+            </div>
+        </nav>
+
+        <div class="flex flex-grow">
+            {% if user.is_authenticated %}
+                <div class="hidden md:block bg-white dark:bg-gray-800 shadow w-64 h-full">
+                    <div class="h-full py-4">
+                        <a href="{% url 'saloon:salon_list' %}" class="bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-200 group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            {% trans "Salons" %}
+                        </a>
+                        <a href="{% url 'saloon:salon_create' %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                            {% trans "Create a Salon" %}
+                        </a>
+                        {% if user.owned_salons.exists %}
+                            {% with salon=user.owned_salons.first %}
+                                <div class="mt-4">
+                                    <h3 class="px-2 text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                                        {{ salon.name }}
+                                    </h3>
+                                    <a href="{% url 'saloon:barber_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Barbers" %}
+                                    </a>
+                                    <a href="{% url 'saloon:client_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Clients" %}
+                                    </a>
+                                    <a href="{% url 'saloon:hairstyle_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Hairstyles" %}
+                                    </a>
+                                    <a href="{% url 'saloon:shave_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Shaves" %}
+                                    </a>
+                                    <a href="{% url 'saloon:item_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Items" %}
+                                    </a>
+                                    <a href="{% url 'saloon:item_purchase_list' salon.id %}" class="text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-700 hover:text-gray-900 dark:hover:text-gray-100 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                                        {% trans "Purchases" %}
+                                    </a>
+                                </div>
+                            {% endwith %}
+                        {% endif %}
+                    </div>
+                </div>
+            {% endif %}
+
+            <main class="flex-1 overflow-y-auto">
+                <div class="py-6">
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+                        <h1 class="text-2xl font-semibold text-gray-900 dark:text-gray-100">{% block header %}{% trans "Dashboard" %}{% endblock %}</h1>
+                    </div>
+                    <div class="mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+                        <div class="py-4">
+                            {% if messages %}
+                                <div class="messages mb-4">
+                                    {% for message in messages %}
+                                        <div class="bg-indigo-100 dark:bg-indigo-900 border-l-4 border-indigo-500 text-indigo-700 dark:text-indigo-200 p-4 mb-2" role="alert">
+                                            {{ message }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% block content %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('[aria-controls="mobile-menu"]');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            const expanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+            mobileMenuButton.setAttribute('aria-expanded', !expanded);
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
